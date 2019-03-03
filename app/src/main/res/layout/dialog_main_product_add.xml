@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/t"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        android:text="Select Quantity"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/l"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp">
+
+        <Button
+            android:id="@+id/minus"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored.custom"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:hint="Quantity"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/plus"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored.custom"
+            android:text="+" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/l"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp">
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/dialog_button_style"
+            android:text="cancel" />
+
+        <Button
+            android:id="@+id/add"
+            style="@style/dialog_button_style"
+            android:text="Add" />
+
+    </LinearLayout>
+</RelativeLayout>
