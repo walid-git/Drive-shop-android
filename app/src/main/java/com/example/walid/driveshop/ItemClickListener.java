@@ -1,6 +1,6 @@
 package com.example.walid.driveshop;
 
-import Util.Product;
+import Shared.Product;
 
 public interface ItemClickListener {
     void onClick(Product p);

@@ -15,7 +15,7 @@ import com.example.walid.driveshop.R;
 
 import java.util.ArrayList;
 
-import Util.Product;
+import Shared.Product;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder> {
 

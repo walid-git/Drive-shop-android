@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,8 +18,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import Adapters.OrderAdapter;
-import Util.Order;
-import Util.SubOrder;
+import Shared.Order;
+import Shared.SubOrder;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -49,8 +48,7 @@ public class OrderActivity extends AppCompatActivity {
                     .setTitle("Confirm")
                     .setMessage("Are you sure you want to order these products ?")
                     .setPositiveButton("confirm", (d, w) -> {
-                        new OrdersTask().execute(new Order(225, 3, cart));
-                        finish();
+                        new OrdersTask().execute(new Order(225, getSharedPreferences(LoginActivity.PREFFERENCES, MODE_PRIVATE).getLong(LoginActivity.ID_KEY, -1), cart));
                     })
                     .setNegativeButton("cancel", (d, w) -> {
                         d.cancel();
@@ -97,15 +95,36 @@ public class OrderActivity extends AppCompatActivity {
                 outputStream.writeObject(order[0]);
                 outputStream.flush();
                 System.out.println("Orders Task : order sent");
+                boolean accepted = inputStream.readBoolean();
                 inputStream.close();
                 outputStream.close();
                 socket.close();
+                if (accepted)
+                    return 0;
+                else
+                    return 1;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return -1;
         }
 
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            if (integer == 0) {
+                startActivity(new Intent(OrderActivity.this, MyOrdersActivity.class));
+                finish();
+            } else if (integer == 1) {
+
+                new AlertDialog.Builder(OrderActivity.this).setMessage("Some of the products you ordered are no more available, please refresh the products list and try again")
+                .setPositiveButton("ok",(dialog, which) -> {startActivity(new Intent(OrderActivity.this, ProductsActivity.class));
+                    finish();})
+                .setCancelable(false)
+                .show();
+
+            }
+        }
     }
 
 

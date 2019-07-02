@@ -1,8 +1,9 @@
-package Util;
+package Shared;
 
 import java.io.Serializable;
 
 public class SubOrder implements Serializable {
+
 
     private Product product;
     private int quantity;
@@ -31,6 +32,8 @@ public class SubOrder implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj instanceof SubOrder)
         return ((SubOrder)obj).product.getId()==this.product.getId();
+        else return super.equals(obj);
     }
 }

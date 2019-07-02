@@ -15,7 +15,7 @@ import com.example.walid.driveshop.R;
 
 import java.util.ArrayList;
 
-import Util.SubOrder;
+import Shared.SubOrder;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
 
